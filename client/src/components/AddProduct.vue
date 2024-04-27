@@ -1,27 +1,29 @@
 <template>
+    <!-- Use v-model to get data from the form -->
     <div class="modal-box flex flex-col gap-3">
         <h3 class="font-bold text-lg">Add a product</h3>
         <label class="input input-bordered flex items-center gap-2">
             Name
-            <input type="text" class="grow" placeholder="Product" v-model="this.product.name" required />
+            <input type="text" class="grow" placeholder="Product" required />
         </label>
         <label class="input input-bordered flex items-center gap-2">
             Description
-            <input type="text" class="grow" placeholder="This a product" v-model="this.product.description" required />
+            <input type="text" class="grow" placeholder="This a product" required />
         </label>
         <label class="input input-bordered flex items-center gap-2">
             Price
-            <input type="number" class="grow" placeholder="9.99$" v-model="this.product.price" required />
+            <input type="number" class="grow" placeholder="9.99$" required />
         </label>
 
         <label class="input input-bordered flex items-center gap-2">
             Quantity
-            <input type="number" class="grow" placeholder="9.99$" v-model="this.product.quantity" required />
+            <input type="number" class="grow" placeholder="9.99$" required />
         </label>
 
         <div class="modal-action">
             <form method="dialog" class="inline-flex justify-end gap-4">
-                <button class="btn btn-info " @click="this.addProduct">Add</button>
+                <!-- Use @click to execute the addProduct() function -->
+                <button class="btn btn-info">Add</button>
                 <button class="btn">Close</button>
             </form>
         </div>
@@ -38,23 +40,13 @@ export default {
 
     data() {
         return {
-            product: {
-                name: "",
-                description: "",
-                price: 0,
-                quantity: 0
-            }
+            // Define  the object that will store our new product
         }
     },
     methods: {
-        async addProduct() {
-            try {
-                const response = await axios.post("http://127.0.0.1:8000/api/products", this.product)
-                toast.success('The product has been added!')
-                setTimeout(function () { window.location.reload();}, 1000);
-            } catch (error) {
-
-            }
+        addProduct() {
+            // Code for adding a new product goes here
+            // Make sure that the function is an  async one
         }
     }
 

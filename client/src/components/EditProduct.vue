@@ -1,35 +1,38 @@
 <template>
+    <!-- Use v-model to get data from the form -->
+    <!-- You can bind the Value attribut to showcase the product to be edited -->
     <div class="modal-box flex flex-col gap-3">
         <h3 class="font-bold text-lg">Edit product</h3>
         <label class="input input-bordered flex items-center gap-2">
             Id
-            <input type="text" class="grow cursor-no-drop" :value="this.product.id" disabled />
+            <input type="text" class="grow cursor-no-drop" disabled />
         </label>
 
         <label class="input input-bordered flex items-center gap-2">
             Name
-            <input type="text" class="grow" v-model="this.product.name"  required />
+            <input type="text" class="grow"  required />
         </label>
 
         <label class="input input-bordered flex items-center gap-2">
             Desc
-            <input type="text" class="grow" v-model="this.product.description" 
+            <input type="text" class="grow"  
                 required />
         </label>
 
         <label class="input input-bordered flex items-center gap-2">
             Price
-            <input type="number" class="grow " v-model="this.product.price"  />
+            <input type="number" class="grow "   />
         </label>
 
         <label class="input input-bordered flex items-center gap-2">
             Quantity
-            <input type="number" class="grow " v-model="this.product.quantity" />
+            <input type="number" class="grow "  />
         </label>
 
         <div class="modal-action">
             <form method="dialog" class="inline-flex justify-end gap-4">
-                <button class="btn btn-info " @click="this.editProduct()">Confirm</button>
+                <!-- Use @click to execute the editProduct() function -->
+                <button class="btn btn-info ">Confirm</button>
                 <button class="btn">Close</button>
             </form>
         </div>
@@ -43,17 +46,11 @@ import 'vue3-toastify/dist/index.css';
 export default {
     name: "EditProduct",
     props: {
-        product: Object,
+        // Prop goes here
     },
     methods: {
-        async editProduct(){
-            try {
-                const response = await axios.patch(`http://127.0.0.1:8000/api/products/${this.product.id}`,this.product)
-                toast.success("Updated Successfully!")
-                setTimeout(function () { window.location.reload(); }, 1000);
-            } catch (error) {
-                console.log(error);
-            }
+        editProduct(){
+           // Code for editing product
         }
     }
 }

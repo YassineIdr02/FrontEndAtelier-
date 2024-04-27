@@ -17,14 +17,17 @@
         <tbody>
           <tr v-for="(product, index ) in this.products" :key="index">
             <th>{{ index + 1 }}</th>
-            <td>{{ product.name }}</td>
-            <td>{{ product.description }}</td>
-            <td>{{ product.price }}</td>
-            <td>{{ product.quantity }}</td>
+            <td><!-- product name here --></td>
+            <td><!-- product description here --></td>
+            <td><!-- product price here --></td>
+            <td><!-- product Quantity here --></td>
             <td class="flex flex-row gap-3">
-              <font-awesome-icon icon="fa-solid fa-trash" class="hover:cursor-pointer" @click="showDeleteConfirmation(product.id)" />
+              <!-- Call up the function  to edit/delete a product. Use @click event for button -->
+              <font-awesome-icon icon="fa-solid fa-trash" class="hover:cursor-pointer"  />
+              <font-awesome-icon icon="fa-solid fa-pen" class="hover:cursor-pointer"  />
+
+              <!-- Feel free to add a popup to show  more details about the product. Use the api endpoint http://127.0.0.1:8000/api/products/:id -->
               <font-awesome-icon icon="fa-solid fa-eye" class="hover:cursor-pointer"  />
-              <font-awesome-icon icon="fa-solid fa-pen" class="hover:cursor-pointer" @click="showEditModal(product)" />
             </td>
           </tr>
         </tbody>
@@ -39,10 +42,12 @@
     </dialog>
 
     <dialog id="edit_form" class="modal">
-      <EditProduct :product="this.editProduct" />
+      <!-- Pass down the product to be edit as a prop -->
+      <EditProduct  />
     </dialog>
 
     <dialog id="dc_form" class="modal">
+      <!-- Pass down the product Id to be deleted as a prop -->
       <DeleteConfirmation :productId="this.productId" />
     </dialog>
 
@@ -65,33 +70,31 @@ export default {
 
   data() {
     return {
-      products: [],
-      editProduct: {},
-      productId: ""
+      // Define the product array
+      // Define edit variables to be used in editing a product (will be passed down as a prop)
+      // Define product Id for use with delete function (will be passed down as a prop)
     }
   },
 
   methods: {
-    async getProducts() {
-      try {
-        const response = await axios.get("http://127.0.0.1:8000/api/products");
-        this.products = response.data;
-      } catch (error) {
-        console.log(response);
-      }
+    // Make sure this function is an async one
+    getProducts() {
+      // Code for  getting products goes here
     },
+
     showEditModal(product) {
-      this.editProduct = product;
+      // Set the edited product
       edit_form.showModal();
     },
+
     showDeleteConfirmation(productid) {
-      this.productId = productid;
+      // Set the productId
       dc_form.showModal();
     },
   },
 
   mounted() {
-    this.getProducts()
+    // Call the get Products method when the component is loaded
   }
 
 
