@@ -4,7 +4,7 @@
         <div class="modal-action">
             <form method="dialog" class="inline-flex justify-end gap-4">
                 <!-- Use @click to execute the deleteProduct() function -->
-                <button class="btn btn-error">Delete</button>
+                <button class="btn btn-error" @click="this.deleteProduct">Delete</button>
                 <button class="btn">Cancel</button>
             </form>
         </div>
@@ -19,11 +19,13 @@ import 'vue3-toastify/dist/index.css';
 export default {
     name: "DeleteConfirmation",
     props: {
-       //  Props here
+        productId: "",
+       
     },
     methods: {
-         deleteProduct() {
-            // Code for deleting product goes here
+        async deleteProduct() {
+            const response = await  axios.delete(`http://localhost:8000/api/products/${this.productId}`)
+            
         }
     }
 }
